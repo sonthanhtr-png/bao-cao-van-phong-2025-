@@ -50,7 +50,7 @@
         radial-gradient(900px 500px at 15% 20%, rgba(255,176,32,.18), transparent 55%),
         radial-gradient(900px 500px at 85% 80%, rgba(0,180,255,.16), transparent 55%),
         linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)),
-        url("images/bg-welcome.jpg");
+        url("bg-welcome.jpg");
       background-size: cover;
       background-position:center;
     }
@@ -492,7 +492,7 @@
   function audioPath(n){ return `audio/h${pad2(n)}.mp3`; }
   function figLabel(n){ return `Hình ${n}`; }
   function resolveImageCandidates(figNum){
-    const base = `images/h${pad2(figNum)}.`;
+    const base = `h${pad2(figNum)}.`;
     return IMG_EXTS.map(ext => base + ext);
   }
 
@@ -819,7 +819,7 @@
       imgEl.classList.add("hidden");
       captionEl.classList.add("hidden");
       imgHint.classList.remove("hidden");
-      imgHint.textContent = `Không tìm thấy ảnh: images/h${pad2(figNum)}.(jpg|jpeg|png). Kiểm tra đúng tên file.`;
+      imgHint.textContent = `Không tìm thấy ảnh: h${pad2(figNum)}.(jpg|jpeg|png). Kiểm tra đúng tên file.`;
     }
   }
 
