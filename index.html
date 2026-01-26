@@ -1,0 +1,992 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Báo cáo tổng kết Công tác văn phòng năm 2025</title>
+  <style>
+    :root{
+      --bg:#07101f;
+      --panel: rgba(10,16,30,.72);
+      --line: rgba(255,255,255,.14);
+      --text:#fff;
+      --muted: rgba(255,255,255,.76);
+      --gold:#ffb020;
+      --cyan:#00b4ff;
+      --radius:18px;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family: Arial, sans-serif;background:var(--bg);color:var(--text)}
+    button{cursor:pointer}
+    .hidden{display:none !important}
+
+    /* ===== Background (Style B) ===== */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(1200px 700px at 12% 18%, rgba(255,176,32,.12), transparent 55%),
+        radial-gradient(900px 520px at 86% 78%, rgba(0,180,255,.10), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      opacity:.95;
+    }
+    body::after{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:
+        repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0, rgba(255,255,255,.05) 1px, transparent 1px, transparent 22px);
+      opacity:.045;
+      mix-blend-mode: overlay;
+    }
+
+    /* ===== Welcome ===== */
+    .welcome{
+      position:fixed; inset:0; z-index:9999;
+      display:grid; place-items:center;
+      background:
+        radial-gradient(900px 500px at 15% 20%, rgba(255,176,32,.18), transparent 55%),
+        radial-gradient(900px 500px at 85% 80%, rgba(0,180,255,.16), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)),
+        url("images/bg-welcome.jpg");
+      background-size: cover;
+      background-position:center;
+    }
+    .welcome::before{
+      content:""; position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.70));
+    }
+    .welcome-card{
+      position:relative;
+      width:min(980px, 92vw);
+      padding:26px 24px;
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(8,12,22,.58);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      white-space:nowrap;
+    }
+    .welcome-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    .title{
+      margin:10px 0 6px;
+      font-size:34px; line-height:1.12; font-weight:900; letter-spacing:.2px;
+    }
+    .subtitle{
+      margin:0; color:var(--muted); line-height:1.5; font-size:14px; width:100%;
+    }
+    .cta-row{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .btn{
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(31,42,68,.75);
+      color:#fff;
+      padding:10px 14px;
+      border-radius:14px;
+      font-weight:900;
+    }
+    .btn.primary{
+      background: linear-gradient(90deg, rgba(255,176,32,.95), rgba(255,140,0,.95));
+      color:#141414;
+      border:none;
+    }
+    .mini{margin-top:10px;font-size:12px;color:rgba(255,255,255,.72)}
+    .kpi-row{margin-top:14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    .kpi{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      border-radius:16px;
+      padding:10px 12px;
+    }
+    .kpi .v{font-size:18px;font-weight:900}
+    .kpi .l{font-size:12px;color:var(--muted);margin-top:2px}
+    @media (max-width:760px){
+      .title{font-size:26px}
+      .kpi-row{grid-template-columns:1fr}
+    }
+
+    /* ===== App ===== */
+    .app{min-height:100%;display:grid;grid-template-rows:auto auto 1fr auto; position:relative}
+    header{
+      padding:12px 16px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.35);
+      backdrop-filter: blur(6px);
+      position:sticky; top:0; z-index:50;
+    }
+    header .top{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    }
+    .brand{font-weight:900;letter-spacing:.2px}
+    .pill{
+      padding:6px 10px;border-radius:999px;border:1px solid var(--line);
+      background:rgba(255,255,255,.06);font-size:12px;color:var(--muted);
+      white-space:nowrap;
+    }
+
+    /* Top controls (tối giản) */
+    .controls{
+      padding:10px 16px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      position:sticky; top:52px; z-index:40;
+    }
+    .controls .left, .controls .right{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .btn2{
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(31,42,68,.78);
+      color:#fff;
+      padding:9px 11px;
+      border-radius:12px;
+      font-weight:900;
+    }
+    .btn2.primary{
+      background: linear-gradient(90deg, rgba(255,176,32,.95), rgba(255,140,0,.95));
+      color:#141414;
+      border:none;
+    }
+    .btn2.stop{
+      background: rgba(255,93,93,.18);
+      border-color: rgba(255,93,93,.35);
+    }
+
+    main{padding:12px 16px 16px;display:grid;gap:12px}
+
+    /* ===== MAP (GIẢM KÍCH THƯỚC) ===== */
+    .map{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      padding:10px 12px 12px; /* giảm padding */
+      overflow:hidden;
+      position:relative;
+    }
+    .map::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(900px 420px at 25% 20%, rgba(255,176,32,.12), transparent 60%),
+        radial-gradient(900px 420px at 85% 80%, rgba(0,180,255,.10), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .map-header{
+      position:relative;
+      display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      margin-bottom:6px; /* giảm */
+    }
+    .map-title{font-weight:900}
+    .legend{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:12px}
+    .legend span{display:inline-flex;align-items:center;gap:6px}
+    .legend i{display:inline-block;width:10px;height:10px;border-radius:50%}
+    .legend .on i{background:var(--gold)}
+    .legend .off i{background:rgba(255,255,255,.22)}
+
+    .lane{
+      position:relative;
+      margin:10px 2px;          /* giảm */
+      padding:10px 10px 10px;   /* giảm */
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25) inset;
+    }
+    .lane-row{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:start}
+    .lane-label{
+      font-weight:900;letter-spacing:.4px;color:#fff;
+      display:flex;align-items:center;gap:8px;
+      padding-top:6px;
+    }
+    .lane-label::before{
+      content:""; width:10px;height:10px;border-radius:50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 6px rgba(255,176,32,.14);
+    }
+
+    .trackWrap{display:grid; gap:6px}  /* giảm */
+    .trackRow{
+      position:relative;
+      height:42px; /* giảm từ 52 */
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:0 14px;
+    }
+    .trackRow::before{
+      content:"";
+      position:absolute; left:14px; right:14px; top:50%;
+      height:7px;
+      transform: translateY(-50%);
+      border-radius:999px;
+      background: linear-gradient(90deg, rgba(255,176,32,.22), rgba(0,180,255,.22));
+      box-shadow: 0 0 0 1px rgba(255,255,255,.10) inset;
+      filter: drop-shadow(0 0 10px rgba(255,176,32,.10));
+    }
+    .node{
+      position:relative;
+      z-index:2;
+      width:34px;height:34px; /* giảm */
+      border-radius:50%;
+      display:grid;place-items:center;
+      font-weight:900;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      transition: transform .15s ease, filter .15s ease, background .15s ease;
+      user-select:none;
+      font-size:12px;
+    }
+    .node:hover{transform: translateY(-1px); filter: brightness(1.1)}
+    .node.active{
+      background: rgba(255,176,32,.28);
+      border-color: rgba(255,176,32,.60);
+      box-shadow: 0 0 0 10px rgba(255,176,32,.14), 0 0 18px rgba(255,176,32,.22);
+    }
+
+    /* Label row */
+    .labelRow{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      padding:0 4px;
+      gap:10px;
+      margin-top:4px;
+    }
+    .lab{
+      width:108px;
+      text-align:center;
+      font-size:11px;
+      line-height:1.2;
+      color: rgba(255,255,255,.88);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.35);
+      border-radius: 999px;
+      padding:5px 7px;
+      box-shadow: 0 10px 20px rgba(0,0,0,.22);
+      user-select:none;
+    }
+    .lab.active{
+      border-color: rgba(255,176,32,.45);
+      box-shadow: 0 0 0 8px rgba(255,176,32,.10), 0 12px 24px rgba(0,0,0,.22);
+    }
+
+    /* ===== CONTENT (TĂNG KÍCH THƯỚC) ===== */
+    .content{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr; /* ưu tiên ảnh to hơn */
+      gap:12px;
+      align-items:stretch;
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .card-hd{
+      padding:10px 12px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.00));
+    }
+    .card-hd .h{font-weight:900}
+
+    .media{
+      min-height:520px; /* tăng ảnh */
+      display:grid;
+      grid-template-rows:auto 1fr;
+    }
+    .imgwrap{
+      position:relative;
+      background: rgba(0,0,0,.22);
+      overflow:hidden;
+    }
+    .imgwrap img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      opacity:1;
+      transition: opacity 220ms ease;
+    }
+    .fadeout{opacity:0}
+    .imgHint{
+      height:100%;
+      display:grid;place-items:center;
+      padding:16px;
+      text-align:center;
+      color: rgba(255,255,255,.70);
+      font-size:13px; line-height:1.4;
+    }
+    .caption{
+      position:absolute;
+      left:12px; bottom:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.45);
+      color: rgba(255,255,255,.92);
+      font-size:12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,.25);
+    }
+
+    .text{padding:16px 18px}
+    .text h2{margin:0 0 10px;font-size:18px;font-weight:900;letter-spacing:.2px}
+    .text .sub{color:var(--muted);font-size:14px;line-height:1.5;margin:0 0 12px}
+    .bullets{margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.5}
+    .progress{height:8px;border-radius:999px;background:rgba(255,255,255,.10);overflow:hidden;margin-top:12px}
+    .progress > div{height:100%;width:0;background:rgba(255,176,32,.85)}
+
+    footer{
+      padding:10px 16px;
+      border-top:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+    }
+
+    @media (max-width: 1020px){
+      .content{grid-template-columns:1fr}
+      .media{min-height:360px}
+      .lane-row{grid-template-columns:1fr}
+      .lane-label{opacity:.95}
+      .lab{width:92px; font-size:11px}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== Welcome ===== -->
+<section class="welcome" id="welcome">
+  <div class="welcome-card">
+    <div class="welcome-top">
+      <span class="badge">CÔNG TY NHÔM LÂM ĐỒNG – TKV</span>
+      <span class="badge">CƠ QUAN VĂN PHÒNG</span>
+    </div>
+
+    <div class="title">Báo cáo tổng kết Công tác văn phòng năm 2025</div>
+    <p class="subtitle">
+      Năm 2025, mặc dù gặp nhiều khó khăn do thiếu diện khai thác vì vướng mắc công tác đền bù, giải phóng mặt bằng, song với giải pháp điều hành linh hoạt, hiệu quả, Công ty đã hoàn thành xuất sắc toàn diện kế hoạch SXKD, các chỉ tiêu sản lượng, tiêu hao đều vượt kế hoạch, việc làm và thu nhập người lao động được đảm bảo, năng suất lao động tăng so với năm 2024.
+    </p>
+
+    <div class="kpi-row">
+      <div class="kpi"><div class="v">740.688 tấn</div><div class="l">Alumin quy đổi (114,0%)</div></div>
+      <div class="kpi"><div class="v">3.761,3 tỷ</div><div class="l">Doanh thu (109,3%)</div></div>
+      <div class="kpi"><div class="v">21 triệu/ng/th</div><div class="l">Thu nhập bình quân (106,6%)</div></div>
+    </div>
+
+    <div class="cta-row">
+      <button class="btn primary" id="btnEnter">Bắt đầu</button>
+      <button class="btn" id="btnEnterAuto">Auto-play</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== App ===== -->
+<div class="app">
+  <header>
+    <div class="top">
+      <div class="brand">Tổng kết Công tác Văn phòng 2025 • Mục tiêu 2026</div>
+      <div class="pill" id="statusPill">Đang dừng</div>
+    </div>
+  </header>
+
+  <div class="controls">
+    <div class="left">
+      <button class="btn2" id="prev">◀ Trước</button>
+      <button class="btn2" id="next">Sau ▶</button>
+      <button class="btn2 primary" id="autoPlay">▶ Auto-play</button>
+      <button class="btn2 stop" id="stop">■ Dừng</button>
+    </div>
+    <div class="right">
+      <span class="pill" id="pos">0/0</span>
+      <span class="pill" id="subpos">—</span>
+    </div>
+  </div>
+
+  <main>
+    <!-- MAP -->
+    <section class="map">
+      <div class="map-header">
+        <div class="map-title">Bản đồ báo cáo (PHẦN I / PHẦN II) — bấm mốc để xem</div>
+        <div class="legend">
+          <span class="on"><i></i> Mốc đang chọn</span>
+          <span class="off"><i></i> Mốc khác</span>
+        </div>
+      </div>
+
+      <div class="lane">
+        <div class="lane-row">
+          <div class="lane-label">PHẦN I</div>
+          <div class="trackWrap">
+            <div class="trackRow" id="track1"></div>
+            <div class="labelRow" id="labels1"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lane">
+        <div class="lane-row">
+          <div class="lane-label">PHẦN II</div>
+          <div class="trackWrap">
+            <div class="trackRow" id="track2"></div>
+            <div class="labelRow" id="labels2"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="content">
+      <div class="card media">
+        <div class="card-hd">
+          <div class="h">Hình ảnh minh hoạ</div>
+          <div class="pill" id="figurePill">Hình —</div>
+        </div>
+        <div class="imgwrap">
+          <div class="imgHint" id="imgHint">Chưa chọn mốc. Bấm mốc trên timeline để hiển thị hình ảnh và nội dung.</div>
+          <img id="img" class="hidden" alt="Minh hoạ"/>
+          <div class="caption hidden" id="caption"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hd">
+          <div class="h">Nội dung</div>
+          <div class="pill" id="topicPill">—</div>
+        </div>
+        <div class="text">
+          <h2 id="title">Sẵn sàng</h2>
+          <p class="sub" id="desc">Bấm mốc để xem. Khi Auto-play, hệ thống tự phát MP3 theo từng hình và tự chuyển khi MP3 kết thúc.</p>
+          <ul class="bullets" id="bullets">
+            <li>Ảnh bên trái, chữ bên phải.</li>
+            <li>MP3 theo từng hình (H01…H17).</li>
+          </ul>
+          <div class="progress"><div id="bar"></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div style="font-size:12px;color:rgba(255,255,255,.70)">
+      Gợi ý quay video: bấm Auto-play → F11 full screen → Chrome Recorder/OBS.
+    </div>
+  </footer>
+</div>
+
+<script>
+  // ===== Image ext resolver =====
+  const IMG_EXTS = ["jpg","jpeg","png","JPG","JPEG","PNG"];
+  function pad2(n){ return String(n).padStart(2,"0"); }
+  function audioPath(n){ return `audio/h${pad2(n)}.mp3`; }
+  function figLabel(n){ return `Hình ${n}`; }
+  function resolveImageCandidates(figNum){
+    const base = `images/h${pad2(figNum)}.`;
+    return IMG_EXTS.map(ext => base + ext);
+  }
+
+  // ===== TEXT BY FIGURE (1–17) =====
+  const FIG_TEXT = {
+    1: {
+      title: "Khu vực Văn phòng (Cơ sở vật chất)",
+      desc: "1.1 Đối với Khu vực Văn phòng:",
+      bullets: [
+        "Thực hiện đầu tư xây dựng Kho lưu trữ tại khu vực gần Hội trường Công ty.",
+        "Cải tạo, sửa chữa các dãy nhà A, B khu tập thể CBCNV khang trang; đưa vào sử dụng đáp ứng nhu cầu sinh sống tại khu tập thể.",
+        "Bố trí mỗi dãy 24 hộ gia đình và khu độc thân 02 người/phòng; các hộ ngày càng gắn bó, xây dựng khu tập thể văn minh, sạch đẹp.",
+        "Hoàn thiện sân bê tông phía trước văn phòng Công ty."
+      ]
+    },
+    2: {
+      title: "Sửa chữa, cải tạo và mua sắm trang thiết bị",
+      desc: "1.1 Đối với Khu vực Văn phòng:",
+      bullets: [
+        "Sửa chữa sân bê tông trước Hội trường Công ty; sửa chữa, cải tạo 01 sân tennis thành 03 sân pickleball.",
+        "Mua sắm công cụ dụng cụ văn phòng: máy tính để bàn, laptop, bàn ghế làm việc cho CBCNV.",
+        "Bổ sung công cụ dụng cụ cho các hội trường, phòng họp của Công ty."
+      ]
+    },
+    3: {
+      title: "Trang trí Tết và quản lý khu tập thể",
+      desc: "1.1 Đối với Khu vực Văn phòng:",
+      bullets: [
+        "Trang trí Tết khu vực văn phòng; mua sắm hoa, cây xanh; làm background để CBCNV chụp hình lưu niệm dịp Tết Nguyên đán.",
+        "Các phòng ban tạo không khí trang trí Tết sôi nổi, đồng bộ.",
+        "Tiếp tục triển khai kế hoạch xây dựng khu tập thể văn minh – xanh – sạch – đẹp; kiểm tra tổng thể công tác quản lý khu tập thể.",
+        "Ban hành lại Quy định quản lý, Nội quy khu tập thể; thành lập Ban tự quản khu tập thể."
+      ]
+    },
+    4: {
+      title: "Văn phòng các đơn vị sản xuất",
+      desc: "1.2 Đối với khu vực văn phòng của các đơn vị sản xuất:",
+      bullets: [
+        "Cơ sở vật chất được tu sửa ngày càng khang trang, trang trí đẹp.",
+        "Mua sắm kịp thời trang thiết bị, công cụ dụng cụ phục vụ công tác văn phòng và phòng họp chung của đơn vị.",
+        "Một số đơn vị đã tổ chức họp, sinh hoạt và hoạt động điều hành tại phòng họp của đơn vị.",
+        "Khuôn viên cây xanh, vườn hoa, tiểu cảnh được chăm sóc bài bản, xanh tươi."
+      ]
+    },
+    5: {
+      title: "Trang trí Tết tại các đơn vị sản xuất",
+      desc: "1.2 Đối với khu vực văn phòng của các đơn vị sản xuất:",
+      bullets: [
+        "Trong dịp Tết Nguyên đán, các đơn vị sản xuất có nhiều ý tưởng trang trí Tết đẹp, độc đáo.",
+        "Tạo không khí ấm áp, vui tươi; động viên CBCNV trực sản xuất trong những ngày Tết."
+      ]
+    },
+    6: {
+      title: "Công tác hậu cần, đón tiếp khách",
+      desc: "2. Công tác hậu cần chuẩn bị các điều kiện đón tiếp khách:",
+      bullets: [
+        "Năm 2025, bộ phận Văn phòng có nhiều tiến bộ; chuẩn bị tốt công tác đón tiếp, hậu cần phục vụ các đoàn khách làm việc và tham quan Công ty.",
+        "Thực hiện trang trọng, chu đáo với khoảng 400 lượt khách đến làm việc tại Công ty.",
+        "Trong đó có nhiều đoàn quan trọng: lãnh đạo cấp cao từ Trung ương đến địa phương và lãnh đạo cấp cao của TKV."
+      ]
+    },
+    7: {
+      title: "Phục vụ họp và tiếp khách",
+      desc: "2. Công tác hậu cần chuẩn bị các điều kiện đón tiếp khách:",
+      bullets: [
+        "Bố trí, chuẩn bị điều kiện phục vụ các cuộc họp trực tiếp/trực tuyến của Công ty ngày càng tốt hơn.",
+        "Công tác phục vụ cơm công nghiệp và tiếp khách tại khu văn phòng Công ty được tổ chức bài bản, chu đáo."
+      ]
+    },
+    8: {
+      title: "Bố trí phương tiện phục vụ CBCNV",
+      desc: "3. Bố trí phương tiện phục vụ CBCNV:",
+      bullets: [
+        "Bố trí xe đưa đón CBCNV đi làm giờ hành chính và đi làm ca; đón đúng địa điểm, thời gian theo quy định; bảo đảm an toàn giao thông.",
+        "Trong năm không nhận được phản ánh về việc bố trí xe đưa đón phục vụ giờ hành chính.",
+        "Bố trí phương tiện phục vụ CBCNV đi công tác chu đáo, tiết kiệm, đúng lịch trình và đúng quy định của Công ty.",
+        "Ban hành quy định quản lý, sử dụng và khoán kinh phí xe ô tô phục vụ công tác chung."
+      ]
+    },
+    9: {
+      title: "Chuyển đổi số lĩnh vực văn phòng",
+      desc: "4. Công tác chuyển đổi số lĩnh vực văn phòng:",
+      bullets: [
+        "Chính thức đưa vào sử dụng Phần mềm quản trị sản xuất; phần mềm tổ chức nhân sự; chia lương.",
+        "Đối với phần mềm điều hành tác nghiệp V-Office: tối ưu phần mềm, bổ sung tính năng nhằm tạo thuận lợi cho người dùng.",
+        "Hạn chế văn bản giấy; tăng cường văn bản điện tử và lưu trữ điện tử.",
+        "Sử dụng Phân hệ giao việc giúp quản trị, theo dõi công việc bài bản, hiệu quả; hạn chế sót việc."
+      ]
+    },
+    10: {
+      title: "Chữ ký số cloud",
+      desc: "4. Công tác chuyển đổi số lĩnh vực văn phòng:",
+      bullets: [
+        "Phối hợp đưa chữ ký số MYSIGN có chứng thư số trên nền tảng cloud thay cho chữ ký số SIM CA và USB token.",
+        "Hoàn tất các thủ tục phục vụ ký kết hợp đồng theo quy định."
+      ]
+    },
+    11: {
+      title: "Tác phong, lề lối làm việc",
+      desc: "5. Các nội dung khác về tác phong, lề lối làm việc:",
+      bullets: [
+        "Đa số CBCNV nâng cao ý thức triển khai nhiệm vụ; tăng phối hợp, trao đổi giữa các đơn vị để tìm giải pháp tháo gỡ khó khăn, vướng mắc nhanh.",
+        "Đa số CBCNV chấp hành tốt giờ giấc đi làm theo quy định.",
+        "Chấp hành đúng quy định trang phục khi đi làm, tham gia họp, hội nghị, sự kiện."
+      ]
+    },
+    12: {
+      title: "Ưu điểm",
+      desc: "1. Ưu điểm:",
+      bullets: [
+        "Cơ quan Văn phòng luôn nhận được sự chỉ đạo sát sao của Lãnh đạo Công ty; là đầu mối chính tham mưu kịp thời, hiệu quả trong các hoạt động SXKD.",
+        "Góp phần ổn định dây chuyền sản xuất, bảo đảm chất lượng sản phẩm và sản xuất an toàn.",
+        "Tham mưu theo chức năng, nhiệm vụ từng lĩnh vực; chăm lo, cải thiện điều kiện làm việc và đời sống vật chất, tinh thần cho người lao động.",
+        "Ý thức chấp hành nội quy, tác phong công nghiệp ngày càng tiến bộ; góp phần xây dựng hình ảnh LDA tốt đẹp hơn."
+      ]
+    },
+    13: {
+      title: "Tồn tại",
+      desc: "2. Tồn tại:",
+      bullets: [
+        "Một số bộ phận chưa hoàn thành công việc đúng tiến độ theo yêu cầu; có công việc gia hạn nhiều lần nhưng vẫn chưa hoàn thành.",
+        "Trong tham mưu triển khai, một số thủ tục còn hạn chế, phức tạp hóa, gây mất thời gian và công sức của các bộ phận.",
+        "Đối với bộ phận HCTH: một số nội dung tham mưu chưa bảo đảm công tác quản lý khu tập thể; hậu cần, tiếp khách đôi lúc còn thiếu sót."
+      ]
+    },
+    14: {
+      title: "Mục tiêu năm 2026",
+      desc: "PHẦN 2: MỤC TIÊU VÀ CÁC GIẢI PHÁP THỰC HIỆN NĂM 2026",
+      bullets: [
+        "Xây dựng cơ quan văn phòng đạt chuẩn cơ quan văn hóa, văn minh, lịch sự, hiện đại, chuyên nghiệp.",
+        "Ứng dụng tối đa các chương trình tin học hóa vào công tác quản lý, điều hành sản xuất.",
+        "Góp phần tích cực trong công tác chuyển đổi số của doanh nghiệp."
+      ]
+    },
+    15: {
+      title: "Giải pháp chính (1)",
+      desc: "2. Các giải pháp chính:",
+      bullets: [
+        "Duy trì nề nếp tư duy – tác phong công nghiệp; làm cho tư duy – tác phong công nghiệp trở thành giá trị văn hóa cốt lõi.",
+        "Các bộ phận hoàn thành tốt chức năng tham mưu, triển khai công việc bảo đảm chất lượng, tiến độ; đơn giản hóa thủ tục.",
+        "Bảo đảm thực hiện tôn chỉ: “Thượng tôn pháp luật”."
+      ]
+    },
+    16: {
+      title: "Giải pháp chính (2)",
+      desc: "2. Các giải pháp chính:",
+      bullets: [
+        "Xác định chuyển đổi số là nhiệm vụ then chốt, mang lại hiệu quả trong công việc, đặc biệt trong công tác quản lý.",
+        "Năm 2026, tiếp tục tham mưu giải pháp chuyển đổi số; nghiên cứu tối ưu VOffice và Phân hệ giao việc để trở thành công cụ tối ưu, tiện ích cho người dùng.",
+        "Tối ưu và đưa vào sử dụng hiệu quả các phần mềm hiện hữu: quản lý nhân sự – tiền lương; quản trị điều hành sản xuất, …"
+      ]
+    },
+    17: {
+      title: "Giải pháp tổng hợp",
+      desc: "2. Các giải pháp chính:",
+      bullets: [
+        "Tiếp tục tổ chức các chương trình văn hoá văn nghệ; tích cực tham gia các hội thi, hội diễn do Tập đoàn và địa phương tổ chức.",
+        "Tích cực thực hiện chương trình kế hoạch hóa, quản trị kế hoạch theo kế hoạch SXKD của Công ty.",
+        "Tiếp tục củng cố cơ sở vật chất văn phòng Công ty, Văn phòng ĐHSX, Văn phòng các đơn vị.",
+        "Tăng cường đầu tư cho công tác sáng kiến, tối ưu hóa của khối cơ quan văn phòng.",
+        "Các lĩnh vực khác thực hiện theo kế hoạch cụ thể của từng đơn vị."
+      ]
+    }
+  };
+
+  // ===== SECTIONS (Map) =====
+  const SECTIONS = [
+    // PHẦN I
+    { id:"p1m1", part:1, idx:1, label:"CSVC", figures:[1,2,3,4,5] },
+    { id:"p1m2", part:1, idx:2, label:"Hậu cần", figures:[6,7] },
+    { id:"p1m3", part:1, idx:3, label:"Phương tiện", figures:[8] },
+    { id:"p1m4", part:1, idx:4, label:"Chuyển đổi số", figures:[9,10] },
+    { id:"p1m5", part:1, idx:5, label:"Tác phong", figures:[11] },
+    { id:"p1m6", part:1, idx:6, label:"Ưu điểm", figures:[12] },
+    { id:"p1m7", part:1, idx:7, label:"Tồn tại", figures:[13] },
+
+    // PHẦN II
+    { id:"p2m1", part:2, idx:1, label:"Mục tiêu 2026", figures:[14] },
+    { id:"p2m2", part:2, idx:2, label:"Giải pháp 2026", figures:[15,16,17] }
+  ];
+
+  // ===== DOM =====
+  const welcome = document.getElementById("welcome");
+  const statusPill = document.getElementById("statusPill");
+  const posEl = document.getElementById("pos");
+  const subposEl = document.getElementById("subpos");
+
+  const track1 = document.getElementById("track1");
+  const track2 = document.getElementById("track2");
+  const labels1 = document.getElementById("labels1");
+  const labels2 = document.getElementById("labels2");
+
+  const figurePill = document.getElementById("figurePill");
+  const topicPill = document.getElementById("topicPill");
+
+  const imgHint = document.getElementById("imgHint");
+  const imgEl = document.getElementById("img");
+  const captionEl = document.getElementById("caption");
+
+  const titleEl = document.getElementById("title");
+  const descEl = document.getElementById("desc");
+  const bulletsEl = document.getElementById("bullets");
+  const barEl = document.getElementById("bar");
+
+  // Audio
+  const audio = new Audio();
+  audio.preload = "auto";
+  audio.onerror = null;
+
+  // State
+  let playing = false;
+  let secIndex = -1;
+  let figIndex = -1;
+
+  // Flatten figures for progress
+  const ALL_FIGS = SECTIONS.flatMap(s => s.figures.map(n => ({secId:s.id, fig:n})));
+  function currentOverallIndex(){
+    if(secIndex < 0 || figIndex < 0) return -1;
+    const sec = SECTIONS[secIndex];
+    const figNum = sec.figures[figIndex];
+    return ALL_FIGS.findIndex(x => x.secId === sec.id && x.fig === figNum);
+  }
+
+  function setBullets(arr){
+    bulletsEl.innerHTML = "";
+    (arr||[]).forEach(t=>{
+      const li = document.createElement("li");
+      li.textContent = t;
+      bulletsEl.appendChild(li);
+    });
+  }
+
+  function updateProgress(){
+    const idx = currentOverallIndex();
+    if(idx < 0){
+      posEl.textContent = `0/${ALL_FIGS.length}`;
+      barEl.style.width = "0%";
+      subposEl.textContent = "—";
+      return;
+    }
+    posEl.textContent = `${idx+1}/${ALL_FIGS.length}`;
+    barEl.style.width = `${((idx+1)/ALL_FIGS.length)*100}%`;
+
+    const sec = SECTIONS[secIndex];
+    subposEl.textContent = `${sec.part===1?'PHẦN I':'PHẦN II'} • Mục ${sec.idx} • Hình ${figIndex+1}/${sec.figures.length}`;
+  }
+
+  function setPlaying(flag){
+    playing = flag;
+    statusPill.textContent = playing ? "Đang chạy" : "Đang dừng";
+  }
+
+  function stopAudio(){
+    audio.pause();
+    audio.currentTime = 0;
+  }
+
+  // Fallback timer nếu mp3 chưa có
+  let fallbackTimer = null;
+  function clearFallback(){
+    if(fallbackTimer){ clearTimeout(fallbackTimer); fallbackTimer=null; }
+  }
+
+  function playCurrentAudio(){
+    clearFallback();
+    stopAudio();
+
+    if(secIndex < 0 || figIndex < 0) return;
+    const sec = SECTIONS[secIndex];
+    const figNum = sec.figures[figIndex];
+
+    const src = audioPath(figNum);
+    audio.src = src;
+
+    audio.play().catch(()=>{
+      if(playing){
+        fallbackTimer = setTimeout(()=> nextStep(), 5000);
+      }
+    });
+
+    audio.onerror = () => {
+      if(playing){
+        fallbackTimer = setTimeout(()=> nextStep(), 5000);
+      }
+    };
+  }
+
+  async function loadImageByCandidates(candidates){
+    return new Promise((resolve, reject)=>{
+      let i = 0;
+      const tryNext = ()=>{
+        if(i >= candidates.length) return reject(new Error("not found"));
+        const src = candidates[i++];
+        const im = new Image();
+        im.onload = ()=> resolve(src);
+        im.onerror = ()=> tryNext();
+        im.src = src;
+      };
+      tryNext();
+    });
+  }
+
+  async function showFigure(figNum){
+    imgHint.classList.add("hidden");
+
+    const candidates = resolveImageCandidates(figNum);
+    try{
+      const found = await loadImageByCandidates(candidates);
+
+      if(!imgEl.classList.contains("hidden")){
+        imgEl.classList.add("fadeout");
+        setTimeout(()=>{ imgEl.src = found; }, 140);
+      } else {
+        imgEl.src = found;
+      }
+
+      imgEl.onload = ()=>{
+        imgEl.classList.remove("hidden");
+        imgEl.classList.remove("fadeout");
+        captionEl.textContent = figLabel(figNum);
+        captionEl.classList.remove("hidden");
+      };
+    }catch{
+      imgEl.classList.add("hidden");
+      captionEl.classList.add("hidden");
+      imgHint.classList.remove("hidden");
+      imgHint.textContent = `Không tìm thấy ảnh: images/h${pad2(figNum)}.(jpg|jpeg|png). Kiểm tra đúng tên file.`;
+    }
+  }
+
+  function highlightNodes(){
+    document.querySelectorAll(".node").forEach(n=>n.classList.remove("active"));
+    document.querySelectorAll(".lab").forEach(l=>l.classList.remove("active"));
+
+    if(secIndex < 0) return;
+    const id = SECTIONS[secIndex].id;
+
+    const node = document.querySelector(`.node[data-id="${id}"]`);
+    const lab  = document.querySelector(`.lab[data-id="${id}"]`);
+    if(node) node.classList.add("active");
+    if(lab) lab.classList.add("active");
+  }
+
+  async function setContentForCurrent(){
+    const sec = SECTIONS[secIndex];
+    const figNum = sec.figures[figIndex];
+
+    await showFigure(figNum);
+
+    // text theo từng hình
+    const t = FIG_TEXT[figNum] || {
+      title: `Hình ${figNum}`,
+      desc: "",
+      bullets: []
+    };
+
+    titleEl.textContent = t.title;
+    descEl.textContent  = t.desc;
+    setBullets(t.bullets);
+
+    figurePill.textContent = figLabel(figNum);
+    topicPill.textContent  = `${sec.part===1?'PHẦN I':'PHẦN II'} • Mục ${sec.idx}: ${sec.label}`;
+
+    highlightNodes();
+    updateProgress();
+  }
+
+  async function goToSection(index){
+    secIndex = Math.max(0, Math.min(SECTIONS.length-1, index));
+    figIndex = 0;
+    await setContentForCurrent();
+    playCurrentAudio();
+  }
+
+  async function goToFigureInSameSection(nextFigIndex){
+    const sec = SECTIONS[secIndex];
+    figIndex = Math.max(0, Math.min(sec.figures.length-1, nextFigIndex));
+    await setContentForCurrent();
+    playCurrentAudio();
+  }
+
+  async function nextStep(){
+    clearFallback();
+    if(secIndex < 0){
+      await goToSection(0);
+      return;
+    }
+    const sec = SECTIONS[secIndex];
+    if(figIndex < sec.figures.length-1){
+      await goToFigureInSameSection(figIndex+1);
+    } else {
+      if(secIndex < SECTIONS.length-1){
+        await goToSection(secIndex+1);
+      } else {
+        setPlaying(false);
+        statusPill.textContent = "Hoàn tất";
+        stopAudio();
+      }
+    }
+  }
+
+  async function prevStep(){
+    clearFallback();
+    if(secIndex < 0){
+      await goToSection(0);
+      return;
+    }
+    const sec = SECTIONS[secIndex];
+    if(figIndex > 0){
+      await goToFigureInSameSection(figIndex-1);
+    } else {
+      if(secIndex > 0){
+        secIndex -= 1;
+        figIndex = SECTIONS[secIndex].figures.length-1;
+        await setContentForCurrent();
+        playCurrentAudio();
+      } else {
+        await goToSection(0);
+      }
+    }
+  }
+
+  // audio ended => next if playing
+  audio.addEventListener("ended", ()=>{
+    clearFallback();
+    if(!playing) return;
+    nextStep();
+  });
+
+  // ===== Build map =====
+  function makeNode(sec, idx){
+    const node = document.createElement("div");
+    node.className = "node";
+    node.dataset.id = sec.id;
+    node.textContent = sec.idx;
+    node.onclick = async ()=>{
+      setPlaying(false);
+      await goToSection(idx);
+    };
+    return node;
+  }
+  function makeLabel(sec, idx){
+    const lab = document.createElement("div");
+    lab.className = "lab";
+    lab.dataset.id = sec.id;
+    lab.textContent = sec.label;
+    lab.onclick = async ()=>{
+      setPlaying(false);
+      await goToSection(idx);
+    };
+    return lab;
+  }
+
+  function buildTracks(){
+    track1.innerHTML = ""; track2.innerHTML = "";
+    labels1.innerHTML = ""; labels2.innerHTML = "";
+
+    SECTIONS.forEach((sec, i)=>{
+      if(sec.part === 1){
+        track1.appendChild(makeNode(sec, i));
+        labels1.appendChild(makeLabel(sec, i));
+      } else {
+        track2.appendChild(makeNode(sec, i));
+        labels2.appendChild(makeLabel(sec, i));
+      }
+    });
+  }
+
+  // Buttons
+  document.getElementById("prev").onclick = ()=>{ setPlaying(false); prevStep(); };
+  document.getElementById("next").onclick = ()=>{ setPlaying(false); nextStep(); };
+  document.getElementById("autoPlay").onclick = async ()=>{
+    if(secIndex < 0) await goToSection(0);
+    setPlaying(true);
+    playCurrentAudio();
+  };
+  document.getElementById("stop").onclick = ()=>{ setPlaying(false); clearFallback(); stopAudio(); };
+
+  // Welcome
+  document.getElementById("btnEnter").onclick = async ()=>{
+    welcome.classList.add("hidden");
+    setPlaying(false);
+    await goToSection(0);
+  };
+  document.getElementById("btnEnterAuto").onclick = async ()=>{
+    welcome.classList.add("hidden");
+    await goToSection(0);
+    setPlaying(true);
+    playCurrentAudio();
+  };
+
+  // Init
+  buildTracks();
+  posEl.textContent = `0/${ALL_FIGS.length}`;
+</script>
+</body>
+</html>
