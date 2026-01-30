@@ -533,7 +533,7 @@
     </div>
 
     <div class="cta-row">
-      <button class="btn primary" id="btnEnter">Bắt đầu</button>
+      <button class="btn primary" id="btnEnter">Xem Báo Cáo</button>
       <button class="btn" id="btnEnterAuto">Auto-play</button>
     </div>
   </div>
@@ -637,7 +637,9 @@
    * CONFIG
    ***************/
   const STRICT_FILE_NAMING = true; // true: chỉ dùng h01.mp3...h17.mp3 (không dò) => nhẹ nhất
-  const AUDIO_BUFFER_MS = 600;     // +0.6s để tránh cắt gấp
+  const AUDIO_BUFFER_MS = 300;     // +0.6s để tránh cắt gấp
+  const EXTRA_WAIT_CAP_MS = 800; // tối đa chỉ chờ thêm 2s sau khi MP3 kết thúc
+
 
   /***************
    * HELPERS
@@ -907,11 +909,17 @@
   }
 
   function scheduleNextRespectHold(){
-    clearHoldTimer();
-    const elapsed = Date.now() - slideStartTs;
-    const remain = Math.max(0, minHoldMs - elapsed);
-    holdTimer = setTimeout(()=> nextStep(), remain);
-  }
+	clearHoldTimer();
+	const elapsed = Date.now() - slideStartTs;
+	const remain = Math.max(0, minHoldMs - elapsed);
+
+	if (remain > 0) {
+    statusPill.textContent = `Đang chuyển tiếp... (chờ ${(remain/1000).toFixed(1)}s)`;
+	}
+
+	holdTimer = setTimeout(()=> nextStep(), remain);
+ }
+
 
   /***************
    * PROGRESS
@@ -1045,12 +1053,16 @@
     audio.src = src;
 
     // duration hold + buffer 0.6s
-    audio.onloadedmetadata = ()=>{
-      const durMs = (audio.duration || 0) * 1000;
-      if(durMs > 0){
-        minHoldMs = Math.max(minHoldMs, durMs + AUDIO_BUFFER_MS);
-      }
-    };
+    audio.onloadedmetadata = () => {
+  const durMs = (audio.duration || 0) * 1000;
+  if (durMs > 0) {
+    const base = durMs + AUDIO_BUFFER_MS; // duration + 0.6s
+    const textEst = minHoldMs;            // minHoldMs đang là ước lượng theo chữ (set ở setContentForCurrent)
+
+    // Chốt thời gian giữ: tối thiểu = base, nhưng nếu chữ dài hơn thì chỉ được cộng thêm tối đa 2s
+    minHoldMs = Math.max(base, Math.min(textEst, base + EXTRA_WAIT_CAP_MS));
+  }
+ };
 
     try{
       await audio.play();
@@ -1212,6 +1224,14 @@
     setPlaying(true);
     await playCurrentAudio();
   }
+// Vào báo cáo NGAY, KHÔNG autoplay, KHÔNG phát welcome.mp3
+  async function enterReportOnly(){
+	welcome.classList.add("hidden");
+	setPlaying(false);       // trạng thái dừng
+	stopAudio(welcomeAudio);
+	stopAudio(audio);
+	await goToSection(0);    // vào hình 1, PHẦN I
+  }
 
   async function playWelcomeThenStart(){
     disableWelcomeButtons(true);
@@ -1238,8 +1258,8 @@
     }
   }
 
-  document.getElementById("btnEnter").onclick = playWelcomeThenStart;
-  document.getElementById("btnEnterAuto").onclick = playWelcomeThenStart;
+  document.getElementById("btnEnter").onclick = ()=>{ enterReportOnly(); };
+  document.getElementById("btnEnterAuto").onclick = ()=>{ playWelcomeThenStart(); };
 
   /***************
    * INIT
