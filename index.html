@@ -119,15 +119,11 @@
     }
     .subtitle p{margin:0 0 10px}
 
-    /* Welcome text delay */
-    .welcome-text{
-      opacity:0;
-      transform: translateY(10px);
-    }
+    /* Welcome text reveal (fade-only) */
+    .welcome-text{ opacity:0; }
     .welcome-text.show{
       opacity:1;
-      transform: translateY(0);
-      transition: all 700ms ease;
+      transition: opacity 700ms ease;
     }
 
     .cta-row{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
@@ -151,15 +147,15 @@
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
       gap:14px;
-      opacity:0;
-      transform: translateY(14px);
-    }
-    .kpi-row.show{
-      opacity:1;
-      transform: translateY(0);
-      transition: all 700ms ease;
     }
     .kpi-row-2{ margin-top:12px; }
+
+    /* KPI reveal (fade-only) */
+    .kpi{ opacity:0; }
+    .kpi.show{
+      opacity:1;
+      transition: opacity 700ms ease;
+    }
 
     .kpi{
       border:1px solid rgba(255,255,255,.12);
@@ -237,7 +233,6 @@
       border-color: rgba(255,93,93,.35);
     }
 
-    /* subpos góc phải: to hơn */
     #subpos{
       font-size:14px;
       font-weight:900;
@@ -328,11 +323,11 @@
       font-weight:900;
       border:1px solid rgba(255,255,255,.18);
       background: rgba(255,255,255,.06);
-      transition: transform .15s ease, filter .15s ease, background .15s ease;
+      transition: background .15s ease, filter .15s ease;
       user-select:none;
       font-size:12px;
     }
-    .node:hover{transform: translateY(-1px); filter: brightness(1.1)}
+    .node:hover{ filter: brightness(1.1)}
     .node.active{
       background: rgba(255,176,32,.28);
       border-color: rgba(255,176,32,.60);
@@ -388,7 +383,6 @@
     }
     .card-hd .h{font-weight:900; font-size:15px}
 
-    /* Hình nhỏ lại 1 chút */
     .media{
       min-height: clamp(220px, 36vh, 420px);
       display:grid;
@@ -428,24 +422,23 @@
       box-shadow: 0 10px 20px rgba(0,0,0,.25);
     }
 
-    /* Chữ nội dung to hơn */
     .text{padding:18px 20px}
     .text h2{
       margin:0 0 8px;
-      font-size:26px;
+      font-size:30px;
       line-height:1.2;
       font-weight:900;
       letter-spacing:.2px;
     }
     .text .sub{
       color:var(--muted);
-      font-size:16px;
+      font-size:26px;
       line-height:1.55;
       margin:6px 0 12px;
     }
     .bullets{
       margin:0;
-      padding-left:18px;
+      padding-left:26px;
       color:var(--muted);
       font-size:16px;
       line-height:1.6;
@@ -465,6 +458,11 @@
       .content{grid-template-columns:1fr}
       .lane-row{grid-template-columns:1fr}
       .lab{width:92px; font-size:11px}
+    }
+
+    /* Giảm chuyển động nếu người dùng bật reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      .welcome-text.show, .kpi.show, .imgwrap img{ transition:none !important; }
     }
   </style>
 </head>
@@ -491,44 +489,44 @@
         Các chỉ tiêu sản lượng, tiêu hao đạt và vượt kế hoạch; việc làm người lao động được đảm bảo; thu nhập và năng suất lao động tiếp tục tăng so với năm 2024.
       </p>
 
-      <p class="welcome-text" data-delay="20000">
+      <p class="welcome-text" data-delay="63000">
         Cơ quan Văn phòng đã tham mưu hiệu quả các kế hoạch, giải pháp quản lý và điều hành sản xuất an toàn; công tác quản lý ngày càng bài bản;
         số liệu chính xác, tin cậy; các chế độ, chính sách đối với người lao động được triển khai đầy đủ, kịp thời.
         Cùng với Tập đoàn, Công ty tiếp tục thực hiện tốt công tác an sinh xã hội tại địa phương, thể hiện trách nhiệm và nghĩa tình doanh nghiệp.
       </p>
 
-      <p class="welcome-text" data-delay="30000">
+      <p class="welcome-text" data-delay="82000">
         Những kết quả đạt được là nhờ sự chỉ đạo sâu sát của Ban lãnh đạo điều hành và sự đoàn kết, nỗ lực của toàn thể CBCNV,
         qua đó tiếp tục khẳng định vị thế và thương hiệu LDA trong ngành công nghiệp sản xuất alumin.
       </p>
     </div>
 
-    <!-- KPI 2 hàng (ẩn trước, hiện theo delay) -->
+    <!-- KPI: để sẵn data-delay từng ô (bạn tự chỉnh sau) -->
     <div class="kpi-row" id="kpiRow1">
-      <div class="kpi">
+      <div class="kpi" data-delay="24000">
         <div class="v">740.688 tấn</div>
         <div class="l">Alumin quy đổi <span class="pct">(114,0%)</span></div>
       </div>
-      <div class="kpi">
+      <div class="kpi" data-delay="32000">
         <div class="v">686.232 tấn</div>
         <div class="l">Tiêu thụ alumin <span class="pct">(114,4%)</span></div>
       </div>
-      <div class="kpi">
+      <div class="kpi" data-delay="38000">
         <div class="v">3.761,3 tỷ</div>
         <div class="l">Doanh thu <span class="pct">(109,3%)</span></div>
       </div>
     </div>
 
     <div class="kpi-row kpi-row-2" id="kpiRow2">
-      <div class="kpi">
+      <div class="kpi" data-delay="44000">
         <div class="v">1.031,9 tỷ</div>
         <div class="l">Nộp NSNN</div>
       </div>
-      <div class="kpi">
+      <div class="kpi" data-delay="50000">
         <div class="v">115,2 tỷ</div>
         <div class="l">Lợi nhuận</div>
       </div>
-      <div class="kpi">
+      <div class="kpi" data-delay="55000">
         <div class="v">21 triệu/ng/th</div>
         <div class="l">Thu nhập bình quân</div>
       </div>
@@ -619,7 +617,7 @@
           <p class="sub" id="desc">Bấm mốc để xem. Khi Auto-play, hệ thống tự phát MP3 theo từng hình và tự chuyển khi MP3 kết thúc.</p>
           <ul class="bullets" id="bullets">
             <li>Ảnh bên trái, chữ bên phải.</li>
-            <li>MP3 theo từng hình (H01…H17).</li>
+            <li>MP3 theo từng hình (h01…h17).</li>
           </ul>
           <div class="progress"><div id="bar"></div></div>
         </div>
@@ -635,7 +633,15 @@
 </div>
 
 <script>
-  // ===== Helpers =====
+  /***************
+   * CONFIG
+   ***************/
+  const STRICT_FILE_NAMING = true; // true: chỉ dùng h01.mp3...h17.mp3 (không dò) => nhẹ nhất
+  const AUDIO_BUFFER_MS = 600;     // +0.6s để tránh cắt gấp
+
+  /***************
+   * HELPERS
+   ***************/
   const IMG_EXTS = ["jpg","jpeg","png","JPG","JPEG","PNG"];
   function pad2(n){ return String(n).padStart(2,"0"); }
   function figLabel(n){ return `Hình ${n}`; }
@@ -645,35 +651,17 @@
     return IMG_EXTS.map(ext => base + ext);
   }
 
-  // ===== Audio candidates (tránh lỗi do đặt tên khác nhau) =====
-  function audioCandidates(n){
-    const p2 = pad2(n);
-    const p1 = String(n);
-    return [
-      `h${p2}.mp3`,
-      `h${p1}.mp3`,
-      `H${p2}.mp3`,
-      `H${p1}.mp3`,
-      `audio/h${p2}.mp3`,
-      `audio/h${p1}.mp3`,
-    ];
+  function audioSrcForFigure(figNum){
+    return `h${pad2(figNum)}.mp3`;
   }
 
-  async function pickFirstPlayableAudio(cands){
-    for (const src of cands){
-      const ok = await new Promise((resolve)=>{
-        const a = new Audio();
-        a.preload = "metadata";
-        a.src = src;
-        a.onloadedmetadata = ()=> resolve(true);
-        a.onerror = ()=> resolve(false);
-      });
-      if(ok) return src;
-    }
-    return null;
+  function countWords(str){
+    return (str || "").trim().split(/\s+/).filter(Boolean).length;
   }
 
-  // ===== TEXT BY FIGURE (1–17) =====
+  /***************
+   * TEXT BY FIGURE (1–17)
+   ***************/
   const FIG_TEXT = {
     1: {
       title: "Về cơ sở vật chất, trang thiết bị phục vụ văn phòng",
@@ -835,7 +823,9 @@
     }
   };
 
-  // ===== Sections =====
+  /***************
+   * SECTIONS
+   ***************/
   const SECTIONS = [
     { id:"p1m1", part:1, idx:1, label:"CSVC", figures:[1,2,3,4,5] },
     { id:"p1m2", part:1, idx:2, label:"Hậu cần", figures:[6,7] },
@@ -848,7 +838,9 @@
     { id:"p2m2", part:2, idx:2, label:"Giải pháp 2026", figures:[15,16,17] }
   ];
 
-  // ===== DOM =====
+  /***************
+   * DOM
+   ***************/
   const welcome = document.getElementById("welcome");
   const statusPill = document.getElementById("statusPill");
   const posEl = document.getElementById("pos");
@@ -872,34 +864,38 @@
 
   // Audio
   const audio = new Audio();
-  audio.preload = "auto";
+  audio.preload = "metadata";
   const welcomeAudio = new Audio("welcome.mp3");
   welcomeAudio.preload = "auto";
 
-  // State
+  /***************
+   * STATE
+   ***************/
   let playing = false;
   let secIndex = -1;
   let figIndex = -1;
 
-  // ===== Slide hold to prevent "nhảy sớm" =====
+  // slide hold
   let slideStartTs = 0;
   let minHoldMs = 4500;
-  let fallbackTimer = null;
+  let holdTimer = null;
 
-  function clearFallback(){ if(fallbackTimer){ clearTimeout(fallbackTimer); fallbackTimer=null; } }
+  function clearHoldTimer(){
+    if(holdTimer){ clearTimeout(holdTimer); holdTimer = null; }
+  }
 
   function setPlaying(flag){
     playing = flag;
     statusPill.textContent = playing ? "Đang chạy" : "Đang dừng";
   }
-  function stopAudio(){
-    audio.pause();
-    audio.currentTime = 0;
+
+  function stopAudio(a){
+    try{
+      a.pause();
+      a.currentTime = 0;
+    }catch{}
   }
 
-  function countWords(str){
-    return (str || "").trim().split(/\s+/).filter(Boolean).length;
-  }
   function computeMinHoldMs(figNum){
     const t = FIG_TEXT[figNum] || {};
     const total =
@@ -909,21 +905,26 @@
     const estMs = (total / 2.5) * 1000; // ~150 wpm
     return Math.max(4500, Math.min(25000, estMs));
   }
+
   function scheduleNextRespectHold(){
-    clearFallback();
+    clearHoldTimer();
     const elapsed = Date.now() - slideStartTs;
     const remain = Math.max(0, minHoldMs - elapsed);
-    fallbackTimer = setTimeout(()=> nextStep(), remain);
+    holdTimer = setTimeout(()=> nextStep(), remain);
   }
 
-  // ===== Progress text =====
+  /***************
+   * PROGRESS
+   ***************/
   const ALL_FIGS = SECTIONS.flatMap(s => s.figures.map(n => ({secId:s.id, fig:n})));
+
   function currentOverallIndex(){
     if(secIndex < 0 || figIndex < 0) return -1;
     const sec = SECTIONS[secIndex];
     const figNum = sec.figures[figIndex];
     return ALL_FIGS.findIndex(x => x.secId === sec.id && x.fig === figNum);
   }
+
   function updateProgress(){
     const idx = currentOverallIndex();
     if(idx < 0){
@@ -945,7 +946,9 @@
     });
   }
 
-  // ===== Image loader =====
+  /***************
+   * IMAGE LOADER
+   ***************/
   async function loadImageByCandidates(candidates){
     return new Promise((resolve, reject)=>{
       let i = 0;
@@ -988,7 +991,9 @@
     }
   }
 
-  // ===== Highlight map =====
+  /***************
+   * MAP HIGHLIGHT
+   ***************/
   function highlightNodes(){
     document.querySelectorAll(".node").forEach(n=>n.classList.remove("active"));
     document.querySelectorAll(".lab").forEach(l=>l.classList.remove("active"));
@@ -998,6 +1003,9 @@
     document.querySelector(`.lab[data-id="${id}"]`)?.classList.add("active");
   }
 
+  /***************
+   * CONTENT SETUP
+   ***************/
   async function setContentForCurrent(){
     const sec = SECTIONS[secIndex];
     const figNum = sec.figures[figIndex];
@@ -1019,10 +1027,12 @@
     updateProgress();
   }
 
-  // ===== Robust audio play =====
+  /***************
+   * AUDIO PLAY (no probing) + hold = max(textEst, duration+buffer)
+   ***************/
   async function playCurrentAudio(){
-    clearFallback();
-    stopAudio();
+    clearHoldTimer();
+    stopAudio(audio);
 
     if(secIndex < 0 || figIndex < 0) return;
     const sec = SECTIONS[secIndex];
@@ -1030,28 +1040,35 @@
 
     statusPill.textContent = `Đang tải audio (hình ${figNum})...`;
 
-    const src = await pickFirstPlayableAudio(audioCandidates(figNum));
-    if(!src){
-      statusPill.textContent = `Không tìm thấy audio hình ${figNum} (tự chuyển theo thời gian)`;
-      if(playing) scheduleNextRespectHold();
-      return;
-    }
+    const src = audioSrcForFigure(figNum);
 
     audio.src = src;
-    audio.play().then(()=>{
+
+    // duration hold + buffer 0.6s
+    audio.onloadedmetadata = ()=>{
+      const durMs = (audio.duration || 0) * 1000;
+      if(durMs > 0){
+        minHoldMs = Math.max(minHoldMs, durMs + AUDIO_BUFFER_MS);
+      }
+    };
+
+    try{
+      await audio.play();
       statusPill.textContent = playing ? "Đang chạy" : "Đang dừng";
-    }).catch(()=>{
+    }catch{
       statusPill.textContent = `Không phát được: ${src} (tự chuyển theo thời gian)`;
       if(playing) scheduleNextRespectHold();
-    });
+    }
   }
 
-  // ended => vẫn phải đủ hold mới chuyển
   audio.addEventListener("ended", ()=>{
     if(!playing) return;
     scheduleNextRespectHold();
   });
 
+  /***************
+   * NAVIGATION
+   ***************/
   async function goToSection(index){
     secIndex = Math.max(0, Math.min(SECTIONS.length-1, index));
     figIndex = 0;
@@ -1067,7 +1084,7 @@
   }
 
   async function nextStep(){
-    clearFallback();
+    clearHoldTimer();
     if(secIndex < 0){
       await goToSection(0);
       return;
@@ -1075,19 +1092,17 @@
     const sec = SECTIONS[secIndex];
     if(figIndex < sec.figures.length - 1){
       await goToFigureInSameSection(figIndex + 1);
+    } else if(secIndex < SECTIONS.length - 1){
+      await goToSection(secIndex + 1);
     } else {
-      if(secIndex < SECTIONS.length - 1){
-        await goToSection(secIndex + 1);
-      } else {
-        setPlaying(false);
-        statusPill.textContent = "Hoàn tất";
-        stopAudio();
-      }
+      setPlaying(false);
+      statusPill.textContent = "Hoàn tất";
+      stopAudio(audio);
     }
   }
 
   async function prevStep(){
-    clearFallback();
+    clearHoldTimer();
     if(secIndex < 0){
       await goToSection(0);
       return;
@@ -1095,19 +1110,19 @@
     const sec = SECTIONS[secIndex];
     if(figIndex > 0){
       await goToFigureInSameSection(figIndex - 1);
+    } else if(secIndex > 0){
+      secIndex -= 1;
+      figIndex = SECTIONS[secIndex].figures.length - 1;
+      await setContentForCurrent();
+      await playCurrentAudio();
     } else {
-      if(secIndex > 0){
-        secIndex -= 1;
-        figIndex = SECTIONS[secIndex].figures.length - 1;
-        await setContentForCurrent();
-        await playCurrentAudio();
-      } else {
-        await goToSection(0);
-      }
+      await goToSection(0);
     }
   }
 
-  // ===== Build map =====
+  /***************
+   * BUILD MAP
+   ***************/
   function makeNode(sec, idx){
     const node = document.createElement("div");
     node.className = "node";
@@ -1144,7 +1159,9 @@
     });
   }
 
-  // ===== Controls =====
+  /***************
+   * CONTROLS
+   ***************/
   document.getElementById("prev").onclick = ()=>{ setPlaying(false); prevStep(); };
   document.getElementById("next").onclick = ()=>{ setPlaying(false); nextStep(); };
   document.getElementById("autoPlay").onclick = async ()=>{
@@ -1154,32 +1171,32 @@
   };
   document.getElementById("stop").onclick = ()=>{
     setPlaying(false);
-    clearFallback();
-    stopAudio();
+    clearHoldTimer();
+    stopAudio(audio);
   };
 
-  // ===== Welcome reveal: text + KPI (welcome only) =====
-  function hideWelcomeText(){
+  /***************
+   * WELCOME REVEAL (text + KPI by data-delay)
+   ***************/
+  function resetWelcomeReveal(){
     document.querySelectorAll(".welcome-text").forEach(p => p.classList.remove("show"));
+    document.querySelectorAll(".kpi").forEach(k => k.classList.remove("show"));
   }
+
   function revealWelcomeText(){
-    hideWelcomeText();
     document.querySelectorAll(".welcome-text").forEach(p=>{
       const delay = parseInt(p.dataset.delay || "0", 10);
       setTimeout(()=> p.classList.add("show"), delay);
     });
   }
-  function hideWelcomeKpi(){
-    document.getElementById("kpiRow1")?.classList.remove("show");
-    document.getElementById("kpiRow2")?.classList.remove("show");
-  }
+
   function revealWelcomeKpi(){
-    hideWelcomeKpi();
-    setTimeout(()=> document.getElementById("kpiRow1")?.classList.add("show"), 7000);
-    setTimeout(()=> document.getElementById("kpiRow2")?.classList.add("show"), 10000);
+    document.querySelectorAll(".kpi").forEach(k=>{
+      const delay = parseInt(k.dataset.delay || "0", 10);
+      setTimeout(()=> k.classList.add("show"), delay);
+    });
   }
 
-  // ===== Welcome: play welcome.mp3 then auto-run =====
   function disableWelcomeButtons(disabled){
     const b1 = document.getElementById("btnEnter");
     const b2 = document.getElementById("btnEnterAuto");
@@ -1198,32 +1215,52 @@
 
   async function playWelcomeThenStart(){
     disableWelcomeButtons(true);
-
-    // reset + play reveal on welcome
+    resetWelcomeReveal();
     revealWelcomeText();
     revealWelcomeKpi();
 
-    clearFallback();
-    stopAudio();
+    clearHoldTimer();
+    stopAudio(audio);
 
     statusPill.textContent = "Đang phát mở đầu...";
-    welcomeAudio.currentTime = 0;
+    stopAudio(welcomeAudio);
 
-    welcomeAudio.onended = async ()=>{ await enterAndAutoPlay(); };
-    welcomeAudio.onerror = async ()=>{ await enterAndAutoPlay(); };
+    const finish = async ()=>{ await enterAndAutoPlay(); };
 
-    welcomeAudio.play().catch(async ()=>{
+    welcomeAudio.onended = finish;
+    welcomeAudio.onerror = finish;
+
+    try{
+      await welcomeAudio.play();
+    }catch{
       // nếu bị chặn autoplay, vẫn vào bài
-      await enterAndAutoPlay();
-    });
+      await finish();
+    }
   }
 
-  document.getElementById("btnEnter").onclick = ()=>{ playWelcomeThenStart(); };
-  document.getElementById("btnEnterAuto").onclick = ()=>{ playWelcomeThenStart(); };
+  document.getElementById("btnEnter").onclick = playWelcomeThenStart;
+  document.getElementById("btnEnterAuto").onclick = playWelcomeThenStart;
 
-  // Init
+  /***************
+   * INIT
+   ***************/
   buildTracks();
   posEl.textContent = `0/${ALL_FIGS.length}`;
+
+  // (Tuỳ chọn) preload ảnh để mượt hơn khi auto-play
+  // Bạn có thể comment khối này nếu không muốn tải trước.
+  (function preloadImages(){
+    for(let i=1;i<=17;i++){
+      const cand = resolveImageCandidates(i);
+      const im = new Image();
+      im.src = cand[0]; // cố gắng preload hXX.jpg (nếu đúng)
+    }
+  })();
+
+  // Nếu bạn muốn cảnh báo khi STRICT_FILE_NAMING mà file sai:
+  if(STRICT_FILE_NAMING){
+    // không làm gì thêm — code đang dùng đúng h01.mp3..h17.mp3
+  }
 </script>
 </body>
 </html>
